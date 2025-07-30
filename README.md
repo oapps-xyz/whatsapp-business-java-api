@@ -256,11 +256,43 @@ WhatsappBusinessCloudApi whatsappBusinessCloudApi = factory.newBusinessCloudApi(
         whatsappBusinessCloudApi.sendMessage(PHONE_NUMBER_ID, message);
 ```
 
-**Note:** Template messages with `Category.MARKETING` are automatically routed to the `/marketing_messages` endpoint instead of the standard `/messages` endpoint.
+**Note:** For marketing template messages, use the `sendMarketingMessage()` method instead of `sendMessage()` to route to the `/marketing_messages` endpoint.
 
 **Result:**
 
 ![image](https://user-images.githubusercontent.com/7831956/211179613-3b9a30db-4f2f-4424-8073-adb8fce09226.png)
+
+[:arrow_heading_up: back](#link-links)
+
+---
+#### [Sending a marketing template message:](https://github.com/Bindambc/whatsapp-business-java-api/blob/main/src/test/java/com/whatsapp/api/examples/SendTemplateMarketingMessageExample.java)
+
+```java
+	WhatsappApiFactory factory = WhatsappApiFactory.newInstance(TestConstants.TOKEN);
+
+        WhatsappBusinessCloudApi whatsappBusinessCloudApi = factory.newBusinessCloudApi();
+
+        var message = MessageBuilder.builder()//
+                .setTo(PHONE_NUMBER_1)//
+                .buildTemplateMessage(//
+                        new TemplateMessage()//
+                                .setLanguage(new Language(LanguageType.EN_US))//
+                                .setName("marketing_music_2")//
+                                .setCategory(Category.MARKETING)//
+                                .addComponent(//
+                                        new HeaderComponent()//
+                                                .addParameter(new ImageParameter()//
+                                                        .setImage(new Image()//
+                                                                .setId("3196424913981611"))))//
+                                .addComponent(//
+                                        new BodyComponent()//
+                                                .addParameter(new TextParameter("Special offer!")))//
+                );
+
+        whatsappBusinessCloudApi.sendMarketingMessage(PHONE_NUMBER_ID, message);
+```
+
+**Note:** Use `sendMarketingMessage()` method for marketing template messages to route to the `/marketing_messages` endpoint.
 
 [:arrow_heading_up: back](#link-links)
 

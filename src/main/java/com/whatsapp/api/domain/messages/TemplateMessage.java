@@ -18,7 +18,7 @@ public class TemplateMessage {
     private String name;
     @JsonProperty("language")
     private Language language;
-    @JsonProperty("category")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Category category;
 
     /**
