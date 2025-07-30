@@ -57,15 +57,29 @@ public class WhatsappBusinessCloudApi {
     }
 
     /**
-     * Use this endpoint to send text, media, contacts, location, and interactive messages,
+     * Use this endpoint to send text, media, contacts, location, and interactive
+     * messages,
      * as well as message templates to your customers.
+     * 
+     * Note: Template messages with Category.MARKETING are automatically routed to
+     * the /marketing_messages endpoint.
      *
      * @param phoneNumberId Represents a specific phone number.
      * @param message       The {@link Message} object.
      * @return {@link MessageResponse}
-     * @see <a href="https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages">official documentation</a>
+     * @see <a href=
+     *      "https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages">official
+     *      documentation</a>
      */
     public MessageResponse sendMessage(String phoneNumberId, Message message) {
+        // Check if this is a template message with MARKETING category
+        if (message.getType() == MessageType.TEMPLATE &&
+                message.getTemplateMessage() != null &&
+                message.getTemplateMessage().getCategory() == Category.MARKETING) {
+            return executeSync(whatsappBusinessCloudApiService.sendMarketingMessage(apiVersion.getValue(),
+                    phoneNumberId, message));
+        }
+
         return executeSync(whatsappBusinessCloudApiService.sendMessage(apiVersion.getValue(), phoneNumberId, message));
     }
 

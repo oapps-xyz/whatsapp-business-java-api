@@ -71,6 +71,6 @@ public class SendTemplateMarketingMessageExample {
                 );
         System.out.println(new ObjectMapper().writeValueAsString(message));
 
-        whatsappBusinessCloudApi.sendMarketingMessage(PHONE_NUMBER_ID, message);
+        whatsappBusinessCloudApi.sendMessage(PHONE_NUMBER_ID, message);
     }
 }

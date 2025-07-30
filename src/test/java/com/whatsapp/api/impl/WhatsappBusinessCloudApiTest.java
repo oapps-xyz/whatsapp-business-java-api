@@ -371,7 +371,7 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
                 .setTo(PHONE_NUMBER_1)//
                 .buildTemplateMessage(templateMessage);
 
-        whatsappBusinessCloudApi.sendMarketingMessage(PHONE_NUMBER_ID, message);
+        whatsappBusinessCloudApi.sendMessage(PHONE_NUMBER_ID, message);
 
         RecordedRequest recordedRequest = mockWebServer.takeRequest();
         Assertions.assertEquals("POST", recordedRequest.getMethod());

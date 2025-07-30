@@ -256,7 +256,7 @@ WhatsappBusinessCloudApi whatsappBusinessCloudApi = factory.newBusinessCloudApi(
         whatsappBusinessCloudApi.sendMessage(PHONE_NUMBER_ID, message);
 ```
 
-**Note:** For marketing template messages, use the `sendMarketingMessage()` method instead of `sendMessage()` to route to the `/marketing_messages` endpoint.
+**Note:** Template messages with `Category.MARKETING` are automatically routed to the `/marketing_messages` endpoint.
 
 **Result:**
 
@@ -289,10 +289,10 @@ WhatsappBusinessCloudApi whatsappBusinessCloudApi = factory.newBusinessCloudApi(
                                                 .addParameter(new TextParameter("Special offer!")))//
                 );
 
-        whatsappBusinessCloudApi.sendMarketingMessage(PHONE_NUMBER_ID, message);
+        whatsappBusinessCloudApi.sendMessage(PHONE_NUMBER_ID, message);
 ```
 
-**Note:** Use `sendMarketingMessage()` method for marketing template messages to route to the `/marketing_messages` endpoint.
+**Note:** Marketing template messages are automatically routed to the `/marketing_messages` endpoint.
 
 [:arrow_heading_up: back](#link-links)
 
