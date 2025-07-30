@@ -76,10 +76,12 @@ public class WhatsappBusinessCloudApi {
         if (message.getType() == MessageType.TEMPLATE &&
                 message.getTemplateMessage() != null &&
                 message.getTemplateMessage().getCategory() == Category.MARKETING) {
+            System.out.println("🔍 [WhatsApp API] Routing marketing template message to /marketing_messages endpoint");
             return executeSync(whatsappBusinessCloudApiService.sendMarketingMessage(apiVersion.getValue(),
                     phoneNumberId, message));
         }
 
+        System.out.println("🔍 [WhatsApp API] Routing regular message to /messages endpoint");
         return executeSync(whatsappBusinessCloudApiService.sendMessage(apiVersion.getValue(), phoneNumberId, message));
     }
 
