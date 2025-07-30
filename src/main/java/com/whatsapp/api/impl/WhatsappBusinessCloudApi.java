@@ -6,6 +6,7 @@ import com.whatsapp.api.domain.media.Media;
 import com.whatsapp.api.domain.media.MediaFile;
 import com.whatsapp.api.domain.media.UploadResponse;
 import com.whatsapp.api.domain.messages.Message;
+import com.whatsapp.api.domain.messages.type.MessageType;
 import com.whatsapp.api.domain.messages.ReadMessage;
 import com.whatsapp.api.domain.messages.response.MessageResponse;
 import com.whatsapp.api.domain.phone.TwoStepCode;
@@ -14,6 +15,7 @@ import com.whatsapp.api.service.WhatsappBusinessCloudApiService;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.MultipartBody.Part;
+import com.whatsapp.api.domain.templates.type.Category;
 
 import static com.whatsapp.api.WhatsappApiServiceGenerator.*;
 import static com.whatsapp.api.configuration.WhatsappApiConfig.getApiVersion;
@@ -64,6 +66,13 @@ public class WhatsappBusinessCloudApi {
      * @see <a href="https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages">official documentation</a>
      */
     public MessageResponse sendMessage(String phoneNumberId, Message message) {
+        // Check if this is a template message with MARKETING category
+        if (message.getType() == MessageType.TEMPLATE &&
+                message.getTemplateMessage() != null &&
+                message.getTemplateMessage().getCategory() == Category.MARKETING) {
+            return executeSync(whatsappBusinessCloudApiService.sendMarketingMessage(apiVersion.getValue(),
+                    phoneNumberId, message));
+        }
 
         return executeSync(whatsappBusinessCloudApiService.sendMessage(apiVersion.getValue(), phoneNumberId, message));
     }

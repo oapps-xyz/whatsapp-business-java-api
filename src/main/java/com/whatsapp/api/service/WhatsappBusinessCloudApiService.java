@@ -28,6 +28,17 @@ public interface WhatsappBusinessCloudApiService {
     Call<MessageResponse> sendMessage(@Path("api-version") String apiVersion, @Path("Phone-Number-ID") String phoneNumberId, @Body Message message);
 
     /**
+     * Send marketing message call.
+     *
+     * @param phoneNumberId the phone number id
+     * @param message       the message
+     * @return the call
+     */
+    @POST("/{api-version}/{Phone-Number-ID}/marketing_messages")
+    Call<MessageResponse> sendMarketingMessage(@Path("api-version") String apiVersion,
+            @Path("Phone-Number-ID") String phoneNumberId, @Body Message message);
+
+    /**
      * Upload media call.
      *
      * @param phoneNumberId  the phone number id

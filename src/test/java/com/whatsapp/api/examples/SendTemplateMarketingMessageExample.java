@@ -20,6 +20,7 @@ import com.whatsapp.api.domain.messages.TemplateMessage;
 import com.whatsapp.api.domain.messages.type.ButtonSubType;
 import com.whatsapp.api.domain.messages.type.CalendarType;
 import com.whatsapp.api.domain.templates.type.LanguageType;
+import com.whatsapp.api.domain.templates.type.Category;
 import com.whatsapp.api.impl.WhatsappBusinessCloudApi;
 
 import static com.whatsapp.api.TestConstants.PHONE_NUMBER_1;
@@ -38,6 +39,7 @@ public class SendTemplateMarketingMessageExample {
                         new TemplateMessage()//
                                 .setLanguage(new Language(LanguageType.EN_US))//
                                 .setName("marketing_music_2")//
+                                .setCategory(Category.MARKETING)//
                                 .addComponent(new HeaderComponent()//
                                         .addParameter(new ImageParameter()//
                                                 .setImage(new Image()//

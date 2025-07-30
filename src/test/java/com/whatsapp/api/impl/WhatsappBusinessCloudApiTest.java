@@ -9,6 +9,7 @@ import com.whatsapp.api.domain.messages.Message.MessageBuilder;
 import com.whatsapp.api.domain.messages.type.*;
 import com.whatsapp.api.domain.phone.TwoStepCode;
 import com.whatsapp.api.domain.templates.type.LanguageType;
+import com.whatsapp.api.domain.templates.type.Category;
 import com.whatsapp.api.exception.WhatsappApiException;
 import com.whatsapp.api.utils.Formatter;
 import mockwebserver3.MockResponse;
@@ -338,6 +339,7 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
         var templateMessage = new TemplateMessage()//
                 .setLanguage(new Language(LanguageType.EN_US))//
                 .setName("marketing_music_2")//
+                .setCategory(Category.MARKETING)//
                 .addComponent(new HeaderComponent()//
                         .addParameter(new ImageParameter()//
                                 .setImage(new Image()//
@@ -373,7 +375,7 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
 
         RecordedRequest recordedRequest = mockWebServer.takeRequest();
         Assertions.assertEquals("POST", recordedRequest.getMethod());
-        Assertions.assertEquals("/" + API_VERSION + "/" + PHONE_NUMBER_ID + "/messages", recordedRequest.getPath());
+        Assertions.assertEquals("/" + API_VERSION + "/" + PHONE_NUMBER_ID + "/marketing_messages", recordedRequest.getPath());
 
         JSONAssert.assertEquals(expectedJson, recordedRequest.getBody().readUtf8(), JSONCompareMode.STRICT);
 
