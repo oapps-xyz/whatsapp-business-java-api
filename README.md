@@ -294,6 +294,8 @@ WhatsappBusinessCloudApi whatsappBusinessCloudApi = factory.newBusinessCloudApi(
 
 **Note:** Marketing template messages are automatically routed to the `/marketing_messages` endpoint.
 
+**Tip:** Use `isMarketingMessage(message)` to verify which endpoint will be used before sending.
+
 [:arrow_heading_up: back](#link-links)
 
 ---

@@ -101,6 +101,20 @@ public class WhatsappBusinessCloudApi {
     }
 
     /**
+     * Check if a message will be routed to the marketing endpoint.
+     * This method helps verify which endpoint will be used without sending the
+     * message.
+     *
+     * @param message The {@link Message} object to check
+     * @return true if the message will be sent to /marketing_messages endpoint
+     */
+    public boolean isMarketingMessage(Message message) {
+        return message.getType() == MessageType.TEMPLATE &&
+                message.getTemplateMessage() != null &&
+                message.getTemplateMessage().getCategory() == Category.MARKETING;
+    }
+
+    /**
      * You can use the endpoint to upload media:
      * All media files sent through this endpoint are encrypted and persist for 30 days, unless they are deleted earlier
      * <p>The maximum supported file size for media messages on Cloud API is 100MB. In the event the customer sends a file that is greater than 100MB, you will receive a webhook with error code 131052 and title:
