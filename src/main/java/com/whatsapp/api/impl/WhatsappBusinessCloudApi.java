@@ -73,9 +73,7 @@ public class WhatsappBusinessCloudApi {
      */
     public MessageResponse sendMessage(String phoneNumberId, Message message) {
         // Check if this is a template message with MARKETING category
-        if (message.getType() == MessageType.TEMPLATE &&
-                message.getTemplateMessage() != null &&
-                message.getTemplateMessage().getCategory() == Category.MARKETING) {
+        if (isMarketingMessage(message)) {
             return executeSync(whatsappBusinessCloudApiService.sendMarketingMessage(apiVersion.getValue(),
                     phoneNumberId, message));
         }
